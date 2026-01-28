@@ -21,7 +21,7 @@ body {
     flex-direction: column;
     gap: 15px;
     position:fixed;
-    margin-top: 5vh;
+    margin-top: 10vh;
     transition: height 0.3s ease;
     box-shadow: 1px 1px 5px #52505318;
     border: 1px solid #eae4ee;

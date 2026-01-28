@@ -680,8 +680,9 @@
                 <a href="#" class="nav-link" onclick="navigateTo('explore')">Explorar</a>
                 <a href="#" class="nav-link" onclick="navigateTo('help')">Ajuda</a>
                 <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
-                <button class="btn btn-primary" onclick="navigateTo('library')">Entrar</button>
-            </nav>
+                <button class="btn btn-primary" onclick="fazerLogout()">Sair</button>
+                <!-- <button class="btn btn-primary" onclick="navigateTo('library')">Entrar</button> -->
+            </nav> 
             <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
         </div>
     </header>
@@ -1362,6 +1363,19 @@
                 renderLibrary();
                 updateStats();
                 alert('✅ Dados limpos com sucesso!');
+            }
+        }
+
+        // Função de logout
+        function fazerLogout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                // Limpar dados de sessão/autenticação se existirem
+                localStorage.removeItem('emailUsuario');
+                localStorage.removeItem('nomeUsuario');
+                localStorage.removeItem('senhaUsuario');
+                
+                // Redirecionar para login
+                window.location.href = 'login.html';
             }
         }
 
