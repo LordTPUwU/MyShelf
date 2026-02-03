@@ -7,678 +7,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #9b87f5;
-            --secondary: #f5d0fe;
-            --accent: #fbbf24;
-            --bg-light: #faf8ff;
-            --bg-white: #ffffff;
-            --text-dark: #2d2d2d;
-            --text-light: #6b7280;
-            --success: #10b981;
-            --danger: #ef4444;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-            transition: var(--transition);
-        }
-
-        body.dark-mode {
-            --bg-light: #1a1a2e;
-            --bg-white: #16213e;
-            --text-dark: #e4e4e7;
-            --text-light: #a1a1aa;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .header {
-            background: var(--bg-white);
-            box-shadow: var(--shadow);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .nav {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: var(--text-dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-        }
-
-        .nav-link:hover {
-            background: var(--secondary);
-            color: var(--primary);
-        }
-
-        .btn {
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-            font-size: 0.95rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), #7c3aed);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background: var(--bg-light);
-            color: var(--text-dark);
-            border: 2px solid var(--primary);
-        }
-
-        .dark-mode-toggle {
-            background: var(--bg-light);
-            border: none;
-            padding: 0.5rem;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
-            transition: var(--transition);
-        }
-
-        .dark-mode-toggle:hover {
-            transform: rotate(20deg);
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, var(--secondary), var(--bg-white));
-            border-radius: 24px;
-            margin-bottom: 3rem;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-        }
-
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 80px;
-            width: 250px;
-            height: calc(100vh - 80px);
-            background: var(--bg-white);
-            padding: 2rem 1rem;
-            box-shadow: var(--shadow);
-            display: none;
-        }
-
-        .sidebar.active {
-            display: block;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-        }
-
-        .sidebar-item {
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            color: var(--text-dark);
-            text-decoration: none;
-            border-radius: 12px;
-            transition: var(--transition);
-        }
-
-        .sidebar-link:hover, .sidebar-link.active {
-            background: var(--secondary);
-            color: var(--primary);
-        }
-
-        .main-content {
-            margin-left: 0;
-            transition: var(--transition);
-        }
-
-        .main-content.with-sidebar {
-            margin-left: 250px;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .search-filter {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .input {
-            padding: 0.8rem 1.2rem;
-            border: 2px solid var(--bg-light);
-            border-radius: 12px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            background: var(--bg-white);
-            color: var(--text-dark);
-            transition: var(--transition);
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .select {
-            padding: 0.8rem 1.2rem;
-            border: 2px solid var(--bg-light);
-            border-radius: 12px;
-            font-family: inherit;
-            background: var(--bg-white);
-            color: var(--text-dark);
-            cursor: pointer;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .card {
-            background: var(--bg-white);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .card-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-meta {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            background: var(--secondary);
-            color: var(--primary);
-        }
-
-        .card-description {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .card-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .btn-icon {
-            padding: 0.6rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: var(--transition);
-            background: var(--bg-light);
-        }
-
-        .btn-icon:hover {
-            transform: scale(1.1);
-        }
-
-        .btn-like {
-            background: #ffe4e6;
-        }
-
-        .btn-like.liked {
-            background: var(--danger);
-            color: white;
-            animation: heartBeat 0.5s;
-        }
-
-        @keyframes heartBeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.3); }
-            50% { transform: scale(1.1); }
-        }
-
-        .fab {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), #7c3aed);
-            color: white;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            box-shadow: var(--shadow-lg);
-            transition: var(--transition);
-            z-index: 100;
-        }
-
-        .fab:hover {
-            transform: rotate(90deg) scale(1.1);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--bg-white);
-            border-radius: 24px;
-            padding: 2rem;
-            max-width: 600px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-
-        .textarea {
-            width: 100%;
-            padding: 0.8rem 1.2rem;
-            border: 2px solid var(--bg-light);
-            border-radius: 12px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            background: var(--bg-white);
-            color: var(--text-dark);
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .file-upload {
-            border: 2px dashed var(--primary);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .file-upload:hover {
-            background: var(--secondary);
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat-card {
-            background: var(--bg-white);
-            padding: 2rem;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .stat-label {
-            color: var(--text-light);
-            margin-top: 0.5rem;
-        }
-
-        .chart-container {
-            background: var(--bg-white);
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-
-        .affinity-card {
-            background: var(--bg-white);
-            padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .affinity-info {
-            flex: 1;
-        }
-
-        .affinity-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .affinity-percentage {
-            color: var(--success);
-            font-weight: 600;
-        }
-
-        .profile-header {
-            background: var(--bg-white);
-            padding: 3rem;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-        }
-
-        .profile-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, var(--primary), #7c3aed);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-        }
-
-        .footer {
-            background: var(--bg-white);
-            padding: 2rem;
-            text-align: center;
-            margin-top: 4rem;
-            box-shadow: var(--shadow);
-        }
-
-        .loading {
-            text-align: center;
-            padding: 3rem;
-            font-size: 1.2rem;
-            color: var(--text-light);
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--bg-light);
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-light);
-        }
-
-        .empty-state-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .help-section {
-            background: var(--bg-white);
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-        }
-
-        .help-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-dark);
-        }
-
-        @media (max-width: 768px) {
-            .nav {
-                display: none;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .sidebar {
-                width: 100%;
-                top: 70px;
-                height: calc(100vh - 70px);
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .main-content.with-sidebar {
-                margin-left: 0;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .search-filter {
-                flex-direction: column;
-            }
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="#" class="logo" onclick="navigateTo('home')">MyShelf 📚</a>
             <nav class="nav">
-                <a href="#" class="nav-link" onclick="navigateTo('home')">Início</a>
-                <a href="#" class="nav-link" onclick="navigateTo('library')">Biblioteca</a>
-                <a href="#" class="nav-link" onclick="navigateTo('explore')">Explorar</a>
-                <a href="#" class="nav-link" onclick="navigateTo('help')">Ajuda</a>
+                <a href="#" class="nav-link" data-page="home" onclick="navigateTo('home')">Início</a>
+                <a href="#" class="nav-link" data-page="library" onclick="navigateTo('library')">Biblioteca</a>
+                <a href="#" class="nav-link" data-page="explore" onclick="navigateTo('explore')">Explorar</a>
+                <a href="#" class="nav-link" data-page="affinity" onclick="navigateTo('affinity')">Afinidades</a>
+                <a href="#" class="nav-link" data-page="stats" onclick="navigateTo('stats')">Estatísticas</a>
+                <a href="#" class="nav-link" data-page="profile" onclick="navigateTo('profile')">Perfil</a>
                 <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
                 <button class="btn btn-primary" onclick="fazerLogout()">Sair</button>
                 <!-- <button class="btn btn-primary" onclick="navigateTo('library')">Entrar</button> -->
@@ -709,47 +50,17 @@
     </div>
 
     <div id="libraryPage" class="page">
-        <aside class="sidebar" id="sidebar">
-            <ul class="sidebar-menu">
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link active" onclick="filterLibrary('wishlist')">
-                        💭 Lista de Desejos
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" onclick="filterLibrary('liked')">
-                        ❤️ Curtidas
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" onclick="navigateTo('explore')">
-                        🌍 Explorar
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" onclick="navigateTo('affinity')">
-                        🤝 Afinidades
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" onclick="navigateTo('stats')">
-                        📊 Estatísticas
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" onclick="navigateTo('profile')">
-                        ⚙️ Perfil
-                    </a>
-                </li>
-            </ul>
-        </aside>
-
-        <main class="main-content with-sidebar">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Minha Biblioteca</h2>
+        <div class="container">
+            <div class="library-top">
+                <div>
+                    <h1 class="library-title">Minha Biblioteca</h1>
+                    <p class="library-subtitle"><span id="libraryCount">0</span> obras na sua coleção</p>
                 </div>
+                <button class="btn btn-primary add-top-btn" onclick="openAddModal()">➕ Adicionar Obra</button>
+            </div>
 
+            <div class="filters-card">
+                <div class="filters-header">🔎 <strong>Filtros</strong></div>
                 <div class="search-filter">
                     <input type="text" class="input" placeholder="🔍 Buscar por nome..." id="searchInput" oninput="filterWorks()">
                     <select class="select" id="typeFilter" onchange="filterWorks()">
@@ -770,16 +81,23 @@
                         <option value="scifi">Sci-Fi</option>
                     </select>
                 </div>
+            </div>
 
-                <div class="cards-grid" id="libraryCards">
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📚</div>
-                        <h3>Sua biblioteca está vazia</h3>
-                        <p>Adicione suas primeiras obras clicando no botão +</p>
-                    </div>
+            <div class="library-tabs" role="tablist">
+                <button class="library-tab active" data-filter="all" onclick="filterLibrary('all')">Todas <span class="tab-count" id="tabTotal">0</span></button>
+                <button class="library-tab" data-filter="liked" onclick="filterLibrary('liked')">❤️ Curtidas <span class="tab-count" id="tabLiked">0</span></button>
+                <button class="library-tab" data-filter="wishlist" onclick="filterLibrary('wishlist')">💬 Desejos <span class="tab-count" id="tabWishlist">0</span></button>
+                <button class="library-tab" data-filter="affinity" onclick="navigateTo('affinity')">🤝 Afinidades</button>
+            </div>
+
+            <div class="cards-grid" id="libraryCards">
+                <div class="empty-state">
+                    <div class="empty-state-icon">📚</div>
+                    <h3>Sua biblioteca está vazia.</h3>
+                    <p>Adicione sua primeira obra clicando em <strong>➕ Adicionar Obra</strong></p>
                 </div>
             </div>
-        </main>
+        </div>
 
         <button class="fab" onclick="openAddModal()">+</button>
     </div>
@@ -790,16 +108,22 @@
                 <h2 class="section-title">🌍 Explorar Obras</h2>
             </div>
 
-            <div class="search-filter">
-                <input type="text" class="input" placeholder="🔍 Buscar filmes, livros..." id="exploreSearch">
-                <button class="btn btn-primary" onclick="searchExternalAPI()">Buscar</button>
+            <div class="explore-tabs">
+                <button class="explore-tab active" data-type="filme" onclick="setExploreType('filme')">🎬 Filmes</button>
+                <button class="explore-tab" data-type="serie" onclick="setExploreType('serie')">📺 Séries</button>
+                <button class="explore-tab" data-type="livro" onclick="setExploreType('livro')">📚 Livros</button>
+            </div>
+
+            <div class="search-filter explore-search">
+                <input type="text" class="input explore-input" placeholder="🔍 Buscar filmes..." id="exploreSearch" onkeydown="if(event.key==='Enter') searchExternalAPI()">
+                <button class="explore-search-btn" onclick="searchExternalAPI()">🔍</button>
             </div>
 
             <div class="cards-grid" id="exploreCards">
                 <div class="empty-state">
                     <div class="empty-state-icon">🔍</div>
                     <h3>Descubra novas obras</h3>
-                    <p>Use a busca acima para encontrar filmes e livros</p>
+                    <p>Use a busca acima para encontrar filmes, séries ou livros</p>
                 </div>
             </div>
         </div>
@@ -807,86 +131,155 @@
 
     <div id="affinityPage" class="page">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">🤝 Suas Afinidades</h2>
+            <div class="affinity-header">
+                <h1 class="library-title">Afinidades 🤝</h1>
+                <p class="library-subtitle">Encontre pessoas com gostos similares aos seus</p>
             </div>
 
-            <div id="affinityList"></div>
+            <div class="affinity-stats-grid">
+                <div class="affinity-stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number" id="affinityUsers">0</div>
+                    <div class="stat-label">Usuários sugeridos</div>
+                </div>
+                <div class="affinity-stat-card">
+                    <div class="stat-icon">💖</div>
+                    <div class="stat-number" id="affinityLikes">0</div>
+                    <div class="stat-label">Suas curtidas</div>
+                </div>
+                <div class="affinity-stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-number" id="affinityTotalWorks">0</div>
+                    <div class="stat-label">Total de obras</div>
+                </div>
+            </div>
+
+            <div class="affinity-list-grid" id="affinityList"></div>
         </div>
     </div>
 
     <div id="statsPage" class="page">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">📊 Estatísticas</h2>
+            <div class="stats-header">
+                <div>
+                    <h1 class="library-title">Estatísticas 📊</h1>
+                    <p class="library-subtitle">Visualize seus hábitos e preferências culturais</p>
+                </div>
             </div>
 
-            <div class="stats-grid">
+            <div class="stats-top-cards">
                 <div class="stat-card">
+                    <div class="stat-icon">📚</div>
                     <div class="stat-number" id="totalBooks">0</div>
-                    <div class="stat-label">📚 Livros</div>
+                    <div class="stat-label">Livros</div>
                 </div>
                 <div class="stat-card">
+                    <div class="stat-icon">🎬</div>
                     <div class="stat-number" id="totalMovies">0</div>
-                    <div class="stat-label">🎬 Filmes</div>
+                    <div class="stat-label">Filmes</div>
                 </div>
                 <div class="stat-card">
+                    <div class="stat-icon">📺</div>
                     <div class="stat-number" id="totalSeries">0</div>
-                    <div class="stat-label">📺 Séries</div>
+                    <div class="stat-label">Séries</div>
                 </div>
                 <div class="stat-card">
+                    <div class="stat-icon">❤️</div>
                     <div class="stat-number" id="totalLiked">0</div>
-                    <div class="stat-label">❤️ Curtidas</div>
+                    <div class="stat-label">Curtidas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📑</div>
+                    <div class="stat-number" id="totalWishlist">0</div>
+                    <div class="stat-label">Desejos</div>
                 </div>
             </div>
 
-            <div class="chart-container">
-                <h3 style="margin-bottom: 2rem;">Distribuição por Gênero</h3>
-                <canvas id="genreChart" width="400" height="400"></canvas>
+            <div class="chart-grid">
+                <div class="chart-card">
+                    <h3>Distribuição por Gêneros</h3>
+                    <canvas id="genreChart"></canvas>
+                </div>
+                <div class="top5-card">
+                    <h3>Top 5 Gêneros</h3>
+                    <div id="topGenres"></div>
+                </div>
             </div>
+
+            <div class="summary-box">
+                <h3>Resumo Geral</h3>
+                <div class="summary-grid">
+                    <div>
+                        <h4>Suas Preferências</h4>
+                        <p>Total de obras: <strong id="sumTotal">0</strong></p>
+                        <p>Taxa de curtidas: <strong id="sumLikedRate">0%</strong></p>
+                        <p>Obras desejadas: <strong id="sumWishlist">0</strong></p>
+                    </div>
+
+                    <div>
+                        <h4>Distribuição por Tipo</h4>
+                        <p><span class="type-icon">📚</span> Livros: <strong id="distBooks">0</strong> — <span id="distBooksPct">0%</span></p>
+                        <p><span class="type-icon">🎬</span> Filmes: <strong id="distMovies">0</strong> — <span id="distMoviesPct">0%</span></p>
+                        <p><span class="type-icon">📺</span> Séries: <strong id="distSeries">0</strong> — <span id="distSeriesPct">0%</span></p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <div id="profilePage" class="page">
         <div class="container">
             <div class="profile-header">
-                <div class="profile-avatar" id="profileAvatar">U</div>
-                <h2 id="profileName">Usuário MyShelf</h2>
-                <p id="profileBio">Amante de boas histórias e grandes aventuras 📖</p>
-                <button class="btn btn-primary" style="margin-top: 1rem;" onclick="editProfile()">Editar Perfil</button>
+                <div class="profile-top-actions" style="display:flex; justify-content:flex-end; gap:0.75rem;">
+                    <button id="btnProfileLogout" class="btn btn-outline" onclick="fazerLogout()">Sair</button>
+                    <button id="btnProfileSave" class="btn btn-primary" style="display:none;" onclick="saveProfileEdit()">💾 Salvar</button>
+                    <button id="btnProfileCancel" class="btn btn-secondary" style="display:none;" onclick="cancelProfileEdit()">Cancelar</button>
+                    <button id="btnProfileEdit" class="btn btn-outline" onclick="startEditProfile()">Editar</button>
+                </div>
+
+                <div id="profileView">
+                    <div class="profile-avatar" id="profileAvatar">
+                        <img id="profileAvatarImg" class="avatar-img" alt="Avatar" style="display:none;" />
+                        <span id="profileAvatarLetter" class="avatar-letter">U</span>
+                    </div>
+                    <h2 id="profileName">Usuário MyShelf</h2>
+                    <p id="profileEmail" style="color:var(--text-light); margin-top:0.25rem;">a@a</p>
+                    <p id="profileBio">Amante de boas histórias e grandes aventuras 📖</p>
+                </div>
+
+                <form id="profileEditForm" class="profile-edit-form" style="display:none;" onsubmit="saveProfileEdit(event)">
+                    <div style="text-align:center;">
+                        <label for="profileAvatarInput" class="avatar-upload">
+                            <div class="profile-avatar" id="profileAvatarPreview">
+                                <img id="profileAvatarPreviewImg" class="avatar-img" alt="Avatar Preview" style="display:none;" />
+                                <span id="profileAvatarPreviewLetter" class="avatar-letter">U</span>
+                            </div>
+                            <div class="avatar-upload-text">Alterar foto</div>
+                        </label>
+                        <input type="file" id="profileAvatarInput" accept="image/*" onchange="handleAvatarFileChange(event)" style="display:none;">
+                        <div style="margin-top:8px;"><button type="button" id="profileRemovePhotoBtn" class="btn btn-outline" style="display:none; padding:0.4rem 0.8rem;" onclick="removeProfileAvatar()">Remover foto</button></div>
+                    </div>
+
+                    <label>Nome</label>
+                    <input class="input" id="profileNameInput" type="text" required>
+
+                    <label>E-mail</label>
+                    <input class="input" id="profileEmailInput" type="email" required>
+                    <div id="profileEmailError" class="input-error" style="display:none;"></div>
+
+                    <label>Bio</label>
+                    <textarea class="input" id="profileBioInput" rows="4"></textarea>
+                </form>
             </div>
 
-            <div class="help-section">
-                <h3 class="help-title">⚙️ Configurações</h3>
+            <div class="profile-actions" style="text-align:center; margin-top:1rem;">
                 <button class="btn btn-secondary" onclick="clearAllData()">🗑️ Limpar todos os dados</button>
             </div>
         </div>
-    </div>
+    </div> 
 
-    <div id="helpPage" class="page">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">❓ Ajuda</h2>
-            </div>
 
-            <div class="help-section">
-                <h3 class="help-title">Como usar o MyShelf?</h3>
-                <p><strong>1. Adicione obras:</strong> Clique no botão + para adicionar livros, filmes ou séries à sua biblioteca.</p>
-                <p><strong>2. Organize:</strong> Use as listas de desejos e curtidas para organizar suas obras.</p>
-                <p><strong>3. Explore:</strong> Descubra novas obras na seção Explorar.</p>
-                <p><strong>4. Afinidades:</strong> Veja outros usuários com gostos similares.</p>
-                <p><strong>5. Estatísticas:</strong> Acompanhe seus hábitos culturais.</p>
-            </div>
-
-            <div class="help-section">
-                <h3 class="help-title">🎨 Recursos</h3>
-                <p>• Modo escuro 🌙</p>
-                <p>• Filtros e busca avançada</p>
-                <p>• Sincronização local (seus dados ficam no navegador)</p>
-                <p>• Design responsivo para mobile e desktop</p>
-            </div>
-        </div>
-    </div>
 
     <div class="modal" id="addModal">
         <div class="modal-content">
@@ -950,439 +343,5 @@
         <p style="color: var(--text-light); margin-top: 0.5rem;">Feito com ❤️ para amantes de cultura</p>
     </footer>
 
-    <script>
-        // Estado da aplicação
-        let works = JSON.parse(localStorage.getItem('myshelf_works')) || [];
-        let currentFilter = 'all';
-        let darkMode = localStorage.getItem('myshelf_darkmode') === 'true';
-        let editingWorkId = null;
-
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', function() {
-            if (darkMode) {
-                document.body.classList.add('dark-mode');
-                document.querySelector('.dark-mode-toggle').textContent = '☀️';
-            }
-            loadPopularWorks();
-            renderLibrary();
-            generateAffinities();
-            updateStats();
-        });
-
-        // Navegação entre páginas
-        function navigateTo(page) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(page + 'Page').classList.add('active');
-            
-            if (page === 'library') {
-                document.querySelector('.main-content').classList.add('with-sidebar');
-                document.getElementById('sidebar').classList.add('active');
-                renderLibrary();
-            } else {
-                document.querySelector('.main-content').classList.remove('with-sidebar');
-                document.getElementById('sidebar').classList.remove('active');
-            }
-
-            if (page === 'stats') {
-                updateStats();
-                setTimeout(() => drawChart(), 100);
-            }
-
-            if (page === 'affinity') {
-                generateAffinities();
-            }
-
-            window.scrollTo(0, 0);
-        }
-
-        // Toggle Sidebar
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-        }
-
-        // Toggle Dark Mode
-        function toggleDarkMode() {
-            darkMode = !darkMode;
-            document.body.classList.toggle('dark-mode');
-            document.querySelector('.dark-mode-toggle').textContent = darkMode ? '☀️' : '🌙';
-            localStorage.setItem('myshelf_darkmode', darkMode);
-        }
-
-        // Modal
-        function openAddModal() {
-            editingWorkId = null;
-            document.getElementById('addModal').classList.add('active');
-            document.getElementById('addWorkForm').reset();
-            document.getElementById('imagePreview').style.display = 'none';
-        }
-
-        function closeAddModal() {
-            document.getElementById('addModal').classList.remove('active');
-            editingWorkId = null;
-        }
-
-        function previewImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('imagePreview');
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Salvar obra
-        function saveWork(event) {
-            event.preventDefault();
-            
-            const work = {
-                id: editingWorkId || Date.now().toString(),
-                name: document.getElementById('workName').value,
-                type: document.getElementById('workType').value,
-                genre: document.getElementById('workGenre').value,
-                description: document.getElementById('workDescription').value,
-                image: document.getElementById('imagePreview').src || null,
-                liked: false,
-                wishlist: true,
-                createdAt: new Date().toISOString()
-            };
-
-            if (editingWorkId) {
-                const index = works.findIndex(w => w.id === editingWorkId);
-                works[index] = { ...works[index], ...work };
-            } else {
-                works.push(work);
-            }
-
-            localStorage.setItem('myshelf_works', JSON.stringify(works));
-            closeAddModal();
-            renderLibrary();
-            updateStats();
-        }
-
-        // Renderizar biblioteca
-        function renderLibrary() {
-            const container = document.getElementById('libraryCards');
-            let filteredWorks = works;
-
-            // Aplicar filtros
-            const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
-            const typeFilter = document.getElementById('typeFilter')?.value || '';
-            const genreFilter = document.getElementById('genreFilter')?.value || '';
-
-            filteredWorks = works.filter(work => {
-                const matchSearch = work.name.toLowerCase().includes(searchTerm);
-                const matchType = !typeFilter || work.type === typeFilter;
-                const matchGenre = !genreFilter || work.genre === genreFilter;
-                const matchFilter = currentFilter === 'all' || 
-                                  (currentFilter === 'liked' && work.liked) ||
-                                  (currentFilter === 'wishlist' && work.wishlist);
-                return matchSearch && matchType && matchGenre && matchFilter;
-            });
-
-            if (filteredWorks.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📚</div>
-                        <h3>Nenhuma obra encontrada</h3>
-                        <p>Adicione novas obras ou ajuste os filtros</p>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = filteredWorks.map(work => `
-                <div class="card">
-                    ${work.image ? 
-                        `<img src="${work.image}" alt="${work.name}" class="card-image">` :
-                        `<div class="card-image"></div>`
-                    }
-                    <div class="card-content">
-                        <h3 class="card-title">${work.name}</h3>
-                        <div class="card-meta">
-                            <span class="badge">${getTypeIcon(work.type)} ${work.type}</span>
-                            <span class="badge">${work.genre}</span>
-                        </div>
-                        <p class="card-description">${work.description || 'Sem descrição'}</p>
-                        <div class="card-actions">
-                            <button class="btn-icon btn-like ${work.liked ? 'liked' : ''}" onclick="toggleLike('${work.id}')">
-                                ${work.liked ? '❤️' : '🤍'}
-                            </button>
-                            <button class="btn-icon" onclick="editWork('${work.id}')" title="Editar">✏️</button>
-                            <button class="btn-icon" onclick="deleteWork('${work.id}')" title="Remover">🗑️</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function getTypeIcon(type) {
-            const icons = { livro: '📚', filme: '🎬', serie: '📺' };
-            return icons[type] || '📄';
-        }
-
-        // Toggle Like
-        function toggleLike(id) {
-            const work = works.find(w => w.id === id);
-            if (work) {
-                work.liked = !work.liked;
-                localStorage.setItem('myshelf_works', JSON.stringify(works));
-                renderLibrary();
-                updateStats();
-            }
-        }
-
-        // Editar obra
-        function editWork(id) {
-            const work = works.find(w => w.id === id);
-            if (work) {
-                editingWorkId = id;
-                document.getElementById('workName').value = work.name;
-                document.getElementById('workType').value = work.type;
-                document.getElementById('workGenre').value = work.genre;
-                document.getElementById('workDescription').value = work.description || '';
-                
-                if (work.image) {
-                    const preview = document.getElementById('imagePreview');
-                    preview.src = work.image;
-                    preview.style.display = 'block';
-                }
-                
-                document.getElementById('addModal').classList.add('active');
-            }
-        }
-
-        // Deletar obra
-        function deleteWork(id) {
-            if (confirm('Tem certeza que deseja remover esta obra?')) {
-                works = works.filter(w => w.id !== id);
-                localStorage.setItem('myshelf_works', JSON.stringify(works));
-                renderLibrary();
-                updateStats();
-            }
-        }
-
-        // Filtros
-        function filterLibrary(filter) {
-            currentFilter = filter;
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            renderLibrary();
-        }
-
-        function filterWorks() {
-            renderLibrary();
-        }
-
-        // Carregar obras populares (mock)
-        function loadPopularWorks() {
-            const popularWorks = [
-                { name: 'O Senhor dos Anéis', type: 'livro', genre: 'Fantasia', description: 'Uma épica jornada pela Terra Média' },
-                { name: 'Inception', type: 'filme', genre: 'Sci-Fi', description: 'Um thriller sobre sonhos dentro de sonhos' },
-                { name: 'Breaking Bad', type: 'serie', genre: 'Drama', description: 'A transformação de um professor em criminoso' },
-                { name: '1984', type: 'livro', genre: 'Ficção', description: 'Distopia clássica de George Orwell' },
-                { name: 'Interestelar', type: 'filme', genre: 'Sci-Fi', description: 'Uma jornada pelo espaço e tempo' },
-                { name: 'Stranger Things', type: 'serie', genre: 'Terror', description: 'Mistérios sobrenaturais nos anos 80' }
-            ];
-
-            const container = document.getElementById('popularWorks');
-            container.innerHTML = popularWorks.map(work => `
-                <div class="card">
-                    <div class="card-image"></div>
-                    <div class="card-content">
-                        <h3 class="card-title">${work.name}</h3>
-                        <div class="card-meta">
-                            <span class="badge">${getTypeIcon(work.type)} ${work.type}</span>
-                            <span class="badge">${work.genre}</span>
-                        </div>
-                        <p class="card-description">${work.description}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Buscar na API externa (OMDb)
-        async function searchExternalAPI() {
-            const query = document.getElementById('exploreSearch').value;
-            if (!query) return;
-
-            const container = document.getElementById('exploreCards');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div>Buscando...</div>';
-
-            try {
-                const response = await fetch(`https://www.omdbapi.com/?s=${query}&apikey=1ec3258d`);
-                const data = await response.json();
-
-                if (data.Response === 'True') {
-                    container.innerHTML = data.Search.map(movie => `
-                        <div class="card">
-                            <img src="${movie.Poster !== 'N/A' ? movie.Poster : ''}" class="card-image" onerror="this.style.display='none'">
-                            <div class="card-content">
-                                <h3 class="card-title">${movie.Title}</h3>
-                                <div class="card-meta">
-                                    <span class="badge">🎬 ${movie.Type}</span>
-                                    <span class="badge">${movie.Year}</span>
-                                </div>
-                                <button class="btn btn-primary" onclick="addFromExternal('${movie.Title}', '${movie.Poster}', '${movie.Type}', '${movie.Year}')">
-                                    Adicionar à Biblioteca
-                                </button>
-                            </div>
-                        </div>
-                    `).join('');
-                } else {
-                    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">😕</div><h3>Nenhum resultado encontrado</h3></div>';
-                }
-            } catch (error) {
-                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⚠️</div><h3>Erro ao buscar</h3><p>Tente novamente mais tarde</p></div>';
-            }
-        }
-
-        function addFromExternal(title, poster, type, year) {
-            const work = {
-                id: Date.now().toString(),
-                name: title,
-                type: type === 'movie' ? 'filme' : type === 'series' ? 'serie' : 'filme',
-                genre: 'diversos',
-                description: `Ano: ${year}`,
-                image: poster !== 'N/A' ? poster : null,
-                liked: false,
-                wishlist: true,
-                createdAt: new Date().toISOString()
-            };
-
-            works.push(work);
-            localStorage.setItem('myshelf_works', JSON.stringify(works));
-            alert('✅ Obra adicionada à sua biblioteca!');
-        }
-
-        // Gerar afinidades
-        function generateAffinities() {
-            const users = [
-                { name: 'Ana Silva', avatar: 'A', affinity: 87 },
-                { name: 'Carlos Mendes', avatar: 'C', affinity: 76 },
-                { name: 'Beatriz Costa', avatar: 'B', affinity: 92 },
-                { name: 'Daniel Souza', avatar: 'D', affinity: 68 },
-                { name: 'Eduarda Lima', avatar: 'E', affinity: 81 }
-            ];
-
-            const container = document.getElementById('affinityList');
-            container.innerHTML = users.map(user => `
-                <div class="affinity-card">
-                    <div class="avatar">${user.avatar}</div>
-                    <div class="affinity-info">
-                        <div class="affinity-name">${user.name}</div>
-                        <div class="affinity-percentage">${user.affinity}% de afinidade</div>
-                    </div>
-                    <button class="btn btn-primary">Ver Lista</button>
-                </div>
-            `).join('');
-        }
-
-        // Estatísticas
-        function updateStats() {
-            const books = works.filter(w => w.type === 'livro').length;
-            const movies = works.filter(w => w.type === 'filme').length;
-            const series = works.filter(w => w.type === 'serie').length;
-            const liked = works.filter(w => w.liked).length;
-
-            document.getElementById('totalBooks').textContent = books;
-            document.getElementById('totalMovies').textContent = movies;
-            document.getElementById('totalSeries').textContent = series;
-            document.getElementById('totalLiked').textContent = liked;
-        }
-
-        function drawChart() {
-            const canvas = document.getElementById('genreChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const genres = {};
-            
-            works.forEach(work => {
-                genres[work.genre] = (genres[work.genre] || 0) + 1;
-            });
-
-            const data = Object.values(genres);
-            const labels = Object.keys(genres);
-            const total = data.reduce((a, b) => a + b, 0);
-
-            if (total === 0) {
-                ctx.fillStyle = '#888';
-                ctx.font = '16px Poppins';
-                ctx.textAlign = 'center';
-                ctx.fillText('Nenhum dado disponível', 200, 200);
-                return;
-            }
-
-            const colors = ['#9b87f5', '#f5d0fe', '#fbbf24', '#10b981', '#ef4444', '#3b82f6', '#f97316', '#8b5cf6'];
-            
-            let currentAngle = -0.5 * Math.PI;
-            
-            data.forEach((value, index) => {
-                const sliceAngle = (value / total) * 2 * Math.PI;
-                
-                ctx.beginPath();
-                ctx.fillStyle = colors[index % colors.length];
-                ctx.moveTo(200, 200);
-                ctx.arc(200, 200, 150, currentAngle, currentAngle + sliceAngle);
-                ctx.closePath();
-                ctx.fill();
-                
-                currentAngle += sliceAngle;
-            });
-
-            // Legenda
-            ctx.font = '14px Poppins';
-            ctx.textAlign = 'left';
-            labels.forEach((label, index) => {
-                ctx.fillStyle = colors[index % colors.length];
-                ctx.fillRect(20, 20 + index * 30, 20, 20);
-                ctx.fillStyle = '#333';
-                ctx.fillText(`${label}: ${data[index]}`, 50, 35 + index * 30);
-            });
-        }
-
-        // Perfil
-        function editProfile() {
-            const name = prompt('Digite seu nome:', 'Usuário MyShelf');
-            if (name) {
-                document.getElementById('profileName').textContent = name;
-                document.getElementById('profileAvatar').textContent = name.charAt(0).toUpperCase();
-            }
-        }
-
-        function clearAllData() {
-            if (confirm('⚠️ Tem certeza? Todos os seus dados serão apagados permanentemente!')) {
-                localStorage.removeItem('myshelf_works');
-                works = [];
-                renderLibrary();
-                updateStats();
-                alert('✅ Dados limpos com sucesso!');
-            }
-        }
-
-        // Função de logout
-        function fazerLogout() {
-            if (confirm('Tem certeza que deseja sair?')) {
-                // Limpar dados de sessão/autenticação se existirem
-                localStorage.removeItem('emailUsuario');
-                localStorage.removeItem('nomeUsuario');
-                localStorage.removeItem('senhaUsuario');
-                
-                // Redirecionar para login
-                window.location.href = 'login.html';
-            }
-        }
-
-        // Fechar modal ao clicar fora
-        document.getElementById('addModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeAddModal();
-            }
-        });
-    </script>
+    <script src="index.js" defer></script>
+</body>
