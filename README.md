@@ -76,13 +76,21 @@ Abra o arquivo index.html no navegador
 
 Checklist de Conformidade
 [x] Estruturas básicas (condicionais, laços, funções).
+
 [x] Objetos + Arrays com map/filter/reduce (≥ 3 métodos).
+
 [x] Arrow functions (incluindo eventos).
+
 [x] DOM dinâmico (criação/remoção/atualização; formulários e eventos).
+
 [x] Requisição assíncrona com fetch + loading/erros.
+
 [x] Promises (.then/.catch) e async/await (try/catch).
+
 [x] Web Storage para persistência.
+
 [x] +1 API HTML5 opcional (Canvas / History).
+
 [x] Organização de arquivos e README completo.
 
 🤖 Uso de Inteligência Artificial
