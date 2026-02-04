@@ -6,29 +6,45 @@ O projeto foi desenvolvido como trabalho acadêmico para a disciplina de JavaScr
 Criar uma aplicação web funcional e responsiva que:
 
 Permita login do usuário
+
 Exiba obras de forma dinâmica
+
 Utilize APIs externas para buscar dados reais
+
 Armazene informações localmente
+
 Demonstre domínio dos conceitos fundamentais de JavaScript moderno
 
 🧠 Funcionalidades
 🔐 Sistema de login (client-side)
+
 🔎 Exploração de obras por categoria:
 Filmes
 Séries
 Livros
+
 ➕ Adição de obras à biblioteca pessoal
+
 💾 Persistência de dados com localStorage
+
 🧭 Navegação dinâmica sem recarregar a página
+
 🧊 Interface moderna com Glassmorphism
+
 🛠️ Tecnologias Utilizadas
 
 HTML5 
+
 CSS3
+
 JavaScript
+
 APIs Públicas
+
 Google Books API
+
 TMDB (The Movie Database)
+
 LocalStorage
 
 APIs Utilizadas
@@ -36,15 +52,20 @@ APIs Utilizadas
 Utilizada para buscar informações de livros como:
 
 título
+
 autor
+
 capa
+
 descrição
 
 🎬 TMDB API
 Utilizada para buscar dados de:
 
 filmes
+
 séries
+
 capas
 
 Organização do Projeto
@@ -83,9 +104,13 @@ Checklist de Conformidade
 Durante o desenvolvimento do projeto, foram utilizadas ferramentas de Inteligência Artificial (ChatGPT) como apoio educacional, principalmente para:
 
 esclarecimento de conceitos
+
 revisão de código
+
 sugestões de arquitetura
+
 melhoria de UI/UX
+
 
 Todas as decisões finais, implementação e integração foram realizadas de forma autoral pelo estudante.
 
