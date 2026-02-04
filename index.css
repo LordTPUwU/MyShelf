@@ -8,7 +8,7 @@
     --primary: #bf9fdf; /* botões claros */
     --secondary: #f5d0fe;
     --accent: #fbbf24;
-    --bg-light: #fffbf5; /* fundo do site em modo claro */
+    --bg-light: #f9f3f4; /* fundo do site em modo claro (padronizado com login.css) */
     --bg-white: #ffffff;
     --text-dark: #2d2d2d;
     --text-light: #6b7280;
@@ -28,12 +28,15 @@ body {
 }
 
 body.dark-mode {
-    --bg-light: #1a1a2e;
-    --bg-white: #16213e;
-    --text-dark: #e4e4e7;
-    --text-light: #a1a1aa;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
+    /* Cores solicitadas para modo escuro */
+    --primary: #bf9fdf; /* destaque / botões */
+    --bg-light: #1f1727; /* fundo principal escuro */
+    --bg-white: #1f1727; /* superfícies escuras (nome herdado) */
+    --text-dark: #f3eef8; /* texto principal claro */
+    --text-light: #cfc7d9; /* texto secundário */
+    --shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+    --border-contrast: rgba(255,255,255,0.12);
+} 
 
 .header {
     /* Glassmorphism suave: fundo semitransparente com blur */
@@ -51,10 +54,10 @@ body.dark-mode {
 
 /* Ajustes para modo escuro */
 body.dark-mode .header {
-    background: rgba(22,33,62,0.6);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-}
+    background: rgba(31,23,39,0.65); /* baseada em #1f1727 */
+    border-bottom: 1px solid var(--border-contrast);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+} 
 
 .header-content {
     max-width: 1400px;
@@ -67,8 +70,23 @@ body.dark-mode .header {
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--primary);
+    display: inline-block;
+    background: linear-gradient(90deg, var(--primary), #2f29a2bd); /* gradiente vertical atualizado */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: var(--primary); /* fallback */
     text-decoration: none;
+}
+
+/* Classe reaplicável para textos que devem usar o mesmo gradiente do logo */
+.brand-gradient {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--primary), #2f29a2bd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: var(--primary);
 }
 
 .nav {
@@ -103,7 +121,7 @@ body.dark-mode .header {
 .btn {
     padding: 0.7rem 1.5rem;
     border: none;
-    border-radius: 12px;
+    border-radius: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
@@ -111,10 +129,16 @@ body.dark-mode .header {
     font-size: 0.95rem;
 }
 
+.btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(16,24,40,0.06); }
+
 .btn-primary {
-    background: var(--primary);
-    color: white;
+    background: var(--primary); /* #bf9fdf */
+    color: #403649; /* texto escuro similar ao login */
+    border-radius: 13px;
+    font-weight: 600;
 }
+
+.btn-primary:hover { filter: brightness(0.95); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
 .btn-primary:hover {
     transform: translateY(-2px);
@@ -150,7 +174,7 @@ body.dark-mode .header {
 .hero {
     text-align: center;
     padding: 4rem 2rem;
-    background: linear-gradient(135deg, var(--secondary), var(--bg-white));
+    background: linear-gradient(135deg, #925dcac4, var(--bg-white));
     border-radius: 24px;
     margin-bottom: 3rem;
 }
@@ -158,7 +182,7 @@ body.dark-mode .header {
 .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    background: linear-gradient(135deg, #8f61dfd3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -244,28 +268,34 @@ body.dark-mode .header {
     display: flex;
     gap: 1rem;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, rgba(155,135,245,0.08), rgba(245,208,254,0.04));
-    padding: 0.5rem;
-    border-radius: 14px;
+    background: #eae6f3;
+    padding: 5px;
+    border-radius: 20px;
 }
 
 .explore-tab {
     flex: 1;
     padding: 0.8rem 1.2rem;
-    border-radius: 12px;
+    border-radius: 15px;
     background: transparent;
     border: none;
     cursor: pointer;
     font-weight: 600;
-    color: var(--text-dark);
+    color: #725e84;
     transition: var(--transition);
 }
 
 .explore-tab.active {
-    background: var(--secondary);
-    color: var(--primary);
+    background: rgba(255,251,245,1);
+    color: #725e84;
     box-shadow: var(--shadow);
-}
+} 
+
+/* Dark mode styles for explore tabs */
+body.dark-mode .explore-tabs { background: rgba(255,255,255,0.02); }
+body.dark-mode .explore-tab { color: var(--text-light); }
+body.dark-mode .explore-tab.active { background: rgba(191,159,223,0.12); color: var(--primary); box-shadow: none; }
+
 
 /* Search styles for explore */
 .explore-search {
@@ -307,33 +337,40 @@ body.dark-mode .header {
     box-shadow: var(--shadow-lg);
 }
 
+/* Inputs / selects seguindo o padrão do login.css */
 .input {
-    padding: 0.8rem 1.2rem;
-    border: 2px solid var(--bg-light);
-    border-radius: 12px;
+    padding: 10px;
+    border: 2px solid rgba(247,242,244,1); /* parecido com login */
+    border-radius: 17px;
     font-family: inherit;
     font-size: 0.95rem;
-    background: var(--bg-white);
+    background: var(--bg-light); /* #fffbf5 */
     color: var(--text-dark);
     transition: var(--transition);
     flex: 1;
     min-width: 200px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
 }
 
 .input:focus {
     outline: none;
-    border-color: var(--primary);
+    border-color: rgba(191,159,223,0.72); /* foco tonalidade do primário */
+    box-shadow: 0 0 0 6px rgba(191,159,223,0.06);
 }
 
 .select {
-    padding: 0.8rem 1.2rem;
-    border: 2px solid var(--bg-light);
-    border-radius: 12px;
+    padding: 10px;
+    border: 2px solid rgba(247,242,244,1);
+    border-radius: 17px;
     font-family: inherit;
-    background: var(--bg-white);
+    background: var(--bg-light);
     color: var(--text-dark);
     cursor: pointer;
 }
+
+/* Textarea padrão */
+.textarea, textarea.input { background: var(--bg-light); border: 2px solid rgba(247,242,244,1); border-radius: 14px; padding:10px; }
+
 
 .cards-grid {
     display: grid;
@@ -343,18 +380,69 @@ body.dark-mode .header {
 }
 
 .card {
-    background: var(--bg-white);
+    background: #fbfafd; /* fundo solicitado para cards */
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: var(--shadow);
+    box-shadow: 1px 1px 5px rgba(82,80,83,0.09);
+    border: 1px solid #eae4ee;
     transition: var(--transition);
     cursor: pointer;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(82,80,83,0.08);
 }
+
+/* Dark-mode contrast borders for key UI elements */
+body.dark-mode .card,
+body.dark-mode .filters-card,
+body.dark-mode .profile-header,
+body.dark-mode .stat-card,
+body.dark-mode .top5-card,
+body.dark-mode .chart-card,
+body.dark-mode .sidebar,
+body.dark-mode .profile-avatar,
+body.dark-mode .summary-box,
+body.dark-mode .library-tab {
+    border: 1px solid var(--border-contrast);
+    background: rgba(255,255,255,0.02);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+/* assegurar que o container das tabs não mostre borda em dark mode */
+body.dark-mode .library-tabs { border: none; background: transparent; padding: 0.25rem 0; }
+
+/* botões das tabs em dark mode */
+body.dark-mode .library-tab { border-color: var(--border-contrast); background: rgba(255,255,255,0.02); color: var(--text-dark); }
+body.dark-mode .library-tab.active { background: rgba(191,159,223,0.14); border-color: rgba(191,159,223,0.3); }
+
+
+/* Botões primários no modo escuro: usar cor clara para fundo e texto escuro para contraste */
+body.dark-mode .btn-primary {
+    background: var(--primary);
+    color: #1f1727;
+    box-shadow: none;
+}
+
+/* Ajustes de cor de links e texto quando em dark */
+body.dark-mode .nav-link { color: var(--text-dark); }
+body.dark-mode .nav-link.active { box-shadow: none; background: rgba(191,159,223,0.12); }
+
+/* Inputs e caixas de texto no perfil em dark mode */
+body.dark-mode .profile-edit-form .input,
+body.dark-mode .profile-edit-form textarea.input,
+body.dark-mode .profile-edit-form .select {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-contrast);
+    color: var(--text-dark);
+    box-shadow: none;
+}
+
+/* texto e caixas de resumo */
+body.dark-mode .summary-box { background: rgba(255,255,255,0.02); border:1px solid var(--border-contrast); }
+
+
 
 .card-image {
     width: 100%;
@@ -1020,10 +1108,11 @@ body.dark-mode .header {
 }
 
 .filters-card {
-    background: linear-gradient(180deg, rgba(155,135,245,0.04), rgba(245,208,254,0.02));
+    background: var(--bg-white);
     padding: 1rem 1.2rem;
     border-radius: 14px;
-    box-shadow: var(--shadow);
+    box-shadow: 1px 1px 5px rgba(82,80,83,0.06);
+    border: 1px solid #eae4ee;
     margin-bottom: 1.25rem;
 }
 
@@ -1037,15 +1126,17 @@ body.dark-mode .header {
     display: flex;
     gap: 1rem;
     margin: 1.5rem 0;
+    background: transparent;
+    padding: 0.25rem 0;
 }
 
 .library-tab {
     flex: 1;
     padding: 0.9rem 1.2rem;
     border-radius: 999px;
-    border: 2px solid transparent;
-    background: var(--bg-white);
-    box-shadow: var(--shadow);
+    border: 1px solid rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.02);
+    box-shadow: none;
     font-weight: 700;
     cursor: pointer;
     display: flex;
@@ -1055,9 +1146,18 @@ body.dark-mode .header {
 }
 
 .library-tab.active {
-    background: linear-gradient(135deg, rgba(155,135,245,0.12), rgba(245,208,254,0.08));
-    border-color: rgba(155,135,245,0.2);
+    background: rgba(191,159,223,0.12);
+    border-color: rgba(191,159,223,0.18);
     color: var(--primary);
+}
+
+.tab-count {
+    background: rgba(155,135,245,0.12);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    margin-left: 0.4rem;
+    color: var(--primary);
+    font-weight: 700;
 }
 
 .tab-count {
