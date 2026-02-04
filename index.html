@@ -18,7 +18,6 @@
                 <a href="#" class="nav-link" data-page="library" onclick="navigateTo('library')">Biblioteca</a>
                 <a href="#" class="nav-link" data-page="explore" onclick="navigateTo('explore')">Explorar</a>
                 <a href="#" class="nav-link" data-page="affinity" onclick="navigateTo('affinity')">Afinidades</a>
-                <a href="#" class="nav-link" data-page="stats" onclick="navigateTo('stats')">Estatísticas</a>
                 <a href="#" class="nav-link" data-page="profile" onclick="navigateTo('profile')">Perfil</a>
                 <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
                 <button class="btn btn-primary" onclick="fazerLogout()">Sair</button>
@@ -56,7 +55,6 @@
                     <h1 class="library-title">Minha Biblioteca</h1>
                     <p class="library-subtitle"><span id="libraryCount">0</span> obras na sua coleção</p>
                 </div>
-                <button class="btn btn-primary add-top-btn" onclick="openAddModal()">➕ Adicionar Obra</button>
             </div>
 
             <div class="filters-card">
@@ -69,37 +67,25 @@
                         <option value="filme">🎬 Filme</option>
                         <option value="serie">📺 Série</option>
                     </select>
-                    <select class="select" id="genreFilter" onchange="filterWorks()">
-                        <option value="">Todos os gêneros</option>
-                        <option value="ficcao">Ficção</option>
-                        <option value="fantasia">Fantasia</option>
-                        <option value="romance">Romance</option>
-                        <option value="terror">Terror</option>
-                        <option value="acao">Ação</option>
-                        <option value="comedia">Comédia</option>
-                        <option value="drama">Drama</option>
-                        <option value="scifi">Sci-Fi</option>
-                    </select>
                 </div>
             </div>
 
             <div class="library-tabs" role="tablist">
                 <button class="library-tab active" data-filter="all" onclick="filterLibrary('all')">Todas <span class="tab-count" id="tabTotal">0</span></button>
                 <button class="library-tab" data-filter="liked" onclick="filterLibrary('liked')">❤️ Curtidas <span class="tab-count" id="tabLiked">0</span></button>
-                <button class="library-tab" data-filter="wishlist" onclick="filterLibrary('wishlist')">💬 Desejos <span class="tab-count" id="tabWishlist">0</span></button>
-                <button class="library-tab" data-filter="affinity" onclick="navigateTo('affinity')">🤝 Afinidades</button>
+                <button class="library-tab" data-filter="wishlist" onclick="filterLibrary('wishlist')">🎬 Assistir <span class="tab-count" id="tabWishlist">0</span></button>
             </div>
 
             <div class="cards-grid" id="libraryCards">
                 <div class="empty-state">
                     <div class="empty-state-icon">📚</div>
                     <h3>Sua biblioteca está vazia.</h3>
-                    <p>Adicione sua primeira obra clicando em <strong>➕ Adicionar Obra</strong></p>
+                    <p>Adicione obras pela aba <strong>Explorar</strong> ou importe usando os botões de adicionar nas buscas.</p>
                 </div>
             </div>
         </div>
 
-        <button class="fab" onclick="openAddModal()">+</button>
+
     </div>
 
     <div id="explorePage" class="page">
@@ -158,75 +144,7 @@
         </div>
     </div>
 
-    <div id="statsPage" class="page">
-        <div class="container">
-            <div class="stats-header">
-                <div>
-                    <h1 class="library-title">Estatísticas 📊</h1>
-                    <p class="library-subtitle">Visualize seus hábitos e preferências culturais</p>
-                </div>
-            </div>
 
-            <div class="stats-top-cards">
-                <div class="stat-card">
-                    <div class="stat-icon">📚</div>
-                    <div class="stat-number" id="totalBooks">0</div>
-                    <div class="stat-label">Livros</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🎬</div>
-                    <div class="stat-number" id="totalMovies">0</div>
-                    <div class="stat-label">Filmes</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">📺</div>
-                    <div class="stat-number" id="totalSeries">0</div>
-                    <div class="stat-label">Séries</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">❤️</div>
-                    <div class="stat-number" id="totalLiked">0</div>
-                    <div class="stat-label">Curtidas</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">📑</div>
-                    <div class="stat-number" id="totalWishlist">0</div>
-                    <div class="stat-label">Desejos</div>
-                </div>
-            </div>
-
-            <div class="chart-grid">
-                <div class="chart-card">
-                    <h3>Distribuição por Gêneros</h3>
-                    <canvas id="genreChart"></canvas>
-                </div>
-                <div class="top5-card">
-                    <h3>Top 5 Gêneros</h3>
-                    <div id="topGenres"></div>
-                </div>
-            </div>
-
-            <div class="summary-box">
-                <h3>Resumo Geral</h3>
-                <div class="summary-grid">
-                    <div>
-                        <h4>Suas Preferências</h4>
-                        <p>Total de obras: <strong id="sumTotal">0</strong></p>
-                        <p>Taxa de curtidas: <strong id="sumLikedRate">0%</strong></p>
-                        <p>Obras desejadas: <strong id="sumWishlist">0</strong></p>
-                    </div>
-
-                    <div>
-                        <h4>Distribuição por Tipo</h4>
-                        <p><span class="type-icon">📚</span> Livros: <strong id="distBooks">0</strong> — <span id="distBooksPct">0%</span></p>
-                        <p><span class="type-icon">🎬</span> Filmes: <strong id="distMovies">0</strong> — <span id="distMoviesPct">0%</span></p>
-                        <p><span class="type-icon">📺</span> Séries: <strong id="distSeries">0</strong> — <span id="distSeriesPct">0%</span></p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
     <div id="profilePage" class="page">
         <div class="container">
@@ -247,6 +165,10 @@
                     <p id="profileEmail" style="color:var(--text-light); margin-top:0.25rem;">a@a</p>
                     <p id="profileBio">Amante de boas histórias e grandes aventuras 📖</p>
                 </div>
+
+
+
+
 
                 <form id="profileEditForm" class="profile-edit-form" style="display:none;" onsubmit="saveProfileEdit(event)">
                     <div style="text-align:center;">
@@ -271,6 +193,27 @@
                     <label>Bio</label>
                     <textarea class="input" id="profileBioInput" rows="4"></textarea>
                 </form>
+
+                <!-- Resumo Geral colocado abaixo das informações/edição da conta -->
+                <div id="profileSummary" class="summary-box">
+                    <h3>Resumo Geral</h3>
+                    <div class="summary-grid">
+                        <div>
+                            <h4>Suas Preferências</h4>
+                            <p>Total de obras: <strong id="sumTotal">0</strong></p>
+                            <p>Taxa de curtidas: <strong id="sumLikedRate">0%</strong></p>
+                            <p>Obras desejadas: <strong id="sumWishlist">0</strong></p>
+                        </div>
+
+                        <div>
+                            <h4>Distribuição por Tipo</h4>
+                            <p><span class="type-icon">📚</span> Livros: <strong id="distBooks">0</strong> — <span id="distBooksPct">0%</span></p>
+                            <p><span class="type-icon">🎬</span> Filmes: <strong id="distMovies">0</strong> — <span id="distMoviesPct">0%</span></p>
+                            <p><span class="type-icon">📺</span> Séries: <strong id="distSeries">0</strong> — <span id="distSeriesPct">0%</span></p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="profile-actions" style="text-align:center; margin-top:1rem;">

@@ -5,10 +5,10 @@
 }
 
 :root {
-    --primary: #9b87f5;
+    --primary: #bf9fdf; /* botões claros */
     --secondary: #f5d0fe;
     --accent: #fbbf24;
-    --bg-light: #faf8ff;
+    --bg-light: #fffbf5; /* fundo do site em modo claro */
     --bg-white: #ffffff;
     --text-dark: #2d2d2d;
     --text-light: #6b7280;
@@ -36,12 +36,24 @@ body.dark-mode {
 }
 
 .header {
-    background: var(--bg-white);
-    box-shadow: var(--shadow);
+    /* Glassmorphism suave: fundo semitransparente com blur */
+    background: rgba(255,255,255,0.55);
+    -webkit-backdrop-filter: blur(8px) saturate(110%);
+    backdrop-filter: blur(8px) saturate(110%);
+    border-bottom: 1px solid rgba(255,255,255,0.45);
+    box-shadow: 0 6px 18px rgba(16,24,40,0.06);
     padding: 1rem 2rem;
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Ajustes para modo escuro */
+body.dark-mode .header {
+    background: rgba(22,33,62,0.6);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
 }
 
 .header-content {
@@ -100,7 +112,7 @@ body.dark-mode {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary), #7c3aed);
+    background: var(--primary);
     color: white;
 }
 
