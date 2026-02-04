@@ -62,7 +62,9 @@ séries
 capas
 
 Organização do Projeto
-A estrutura do projeto é composta pelos seguintes arquivos:<img width="128" height="225" alt="Screenshot from 2026-02-04 08-18-00" src="https://github.com/user-attachments/assets/dab0ce77-01fb-43eb-860f-13af2d05dc1b" />
+A estrutura do projeto é composta pelos seguintes arquivos:
+
+<img width="128" height="225" alt="Screenshot from 2026-02-04 08-18-00" src="https://github.com/user-attachments/assets/dab0ce77-01fb-43eb-860f-13af2d05dc1b" />
 
 ⚙️ Como Executar o Projeto
 
